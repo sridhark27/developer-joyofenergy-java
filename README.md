@@ -58,7 +58,7 @@ These values are used in the code and in the following examples too.
 ## Requirements
 
 The project requires [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) or
-higher.
+higher. Docker can be used as an alternative way to build and run this project.
 
 The project makes use of Gradle and uses
 the [Gradle wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html), which means you don't need Gradle
@@ -89,7 +89,7 @@ Run the application using Java and the executable JAR file produced by the Gradl
 listening to port `8080`.
 
 ```console
-$ java -jar build/libs/joi-energy.jar
+$ java -jar build/libs/developer-joyofenergy-java.jar
 ```
 
 ### Run the tests
@@ -122,11 +122,51 @@ Run the application which will be listening on port `8080`.
 $ ./gradlew bootRun
 ```
 
+## Useful Docker commands
+
+Docker is an alternative way to run the project and works well in environments where the correct version Java is not
+available and cannot be installed. Using docker, we can still build and run the project. Please note that this is an
+alternative approach to be used in case Java cannot be installed.
+
+### Build docker image
+
+Build the project using docker and tag it
+
+```console
+$ docker build . -t developer-joyofenergy-java:local
+```
+
+### Run the application as a docker container
+
+Run the application which will be listening on port `8080`.
+
+```console
+$ docker run --rm -d --name developer-joyofenergy-java -p 8080:8080 developer-joyofenergy-java:local
+```
+
+### Log into the docker container
+
+Open a `bash` shell into the running docker container. This maybe useful when debug the application while running, but
+should not be necessary and only shown here for completeness.
+
+```console
+$ docker exec -it developer-joyofenergy-java /bin/bash
+```
+
+### Stop the docker container
+
+Stop the docker container
+
+```console
+$ docker stop developer-joyofenergy-java
+```
+
 ## API
 
 Below is a list of API endpoints with their respective input and output. Please note that the application needs to be
 running for the following endpoints to work. For more information about how to run the application, please refer
-to [run the application](#run-the-application) section above.
+to [run the application](#run-the-application)
+or [run the application as a docker container](#run-the-application-as-a-docker-container) sections above.
 
 ### Store Readings
 
